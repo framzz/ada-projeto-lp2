@@ -1,0 +1,22 @@
+[
+    {"name": "Buddy", "age": 2, "species": "Dog", "breed": "Golden Retriever", "weight": 25, "fur_color": "Golden"},
+    {"name": "Whiskers", "age": 1, "species": "Cat", "breed": "Siamese", "weight": 8, "fur_color": "Cream"},
+    {"name": "Rocky", "age": 3, "species": "Dog", "breed": "German Shepherd", "weight": 35, "fur_color": "Black/Tan"},
+    {"name": "Fluffy", "age": 4, "species": "Cat", "breed": "Persian", "weight": 10, "fur_color": "White"},
+    {"name": "Charlie", "age": 1, "species": "Dog", "breed": "Beagle", "weight": 18, "fur_color": "Tri-color"},
+    {"name": "Mittens", "age": 2, "species": "Cat", "breed": "Maine Coon", "weight": 15, "fur_color": "Tabby"},
+    {"name": "Max", "age": 5, "species": "Dog", "breed": "Labrador Retriever", "weight": 30, "fur_color": "Chocolate"},
+    {"name": "Oreo", "age": 1, "species": "Cat", "breed": "Domestic Shorthair", "weight": 7, "fur_color": "Black/White"},
+    {"name": "Coco", "age": 3, "species": "Dog", "breed": "Poodle", "weight": 15, "fur_color": "Apricot"},
+    {"name": "Smokey", "age": 2, "species": "Cat", "breed": "Ragdoll", "weight": 12, "fur_color": "Blue Bicolor"},
+    {"name": "Bailey", "age": 4, "species": "Dog", "breed": "Boxer", "weight": 22, "fur_color": "Fawn"},
+    {"name": "Shadow", "age": 1, "species": "Cat", "breed": "Siberian", "weight": 14, "fur_color": "Gray"},
+    {"name": "Daisy", "age": 3, "species": "Dog", "breed": "Dachshund", "weight": 12, "fur_color": "Red"},
+    {"name": "Milo", "age": 2, "species": "Cat", "breed": "Bengal", "weight": 18, "fur_color": "Spotted Rosetted"},
+    {"name": "Chloe", "age": 5, "species": "Dog", "breed": "Shih Tzu", "weight": 10, "fur_color": "White/Gold"},
+    {"name": "Leo", "age": 1, "species": "Cat", "breed": "Scottish Fold", "weight": 9, "fur_color": "Blue Tabby"},
+    {"name": "Riley", "age": 3, "species": "Dog", "breed": "Husky", "weight": 28, "fur_color": "Gray/White"},
+    {"name": "Luna", "age": 2, "species": "Cat", "breed": "Sphynx", "weight": 6, "fur_color": "Pink"},
+    {"name": "Teddy", "age": 4, "species": "Dog", "breed": "Cavalier King Charles Spaniel", "weight": 13, "fur_color": "Blenheim"},
+    {"name": "Oliver", "age": 1, "species": "Cat", "breed": "British Shorthair", "weight": 11, "fur_color": "Blue"}
+]

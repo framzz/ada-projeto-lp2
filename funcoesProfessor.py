@@ -1,4 +1,6 @@
-# função professor
+def valida_opcoes(valor: str, opcoes: list) -> bool:
+    return valor in opcoes
+
 def obter_opcoes(opcoes, msg='Opções'):
     msg = f"{msg} ({' | '.join([f'{key} - {values}' for key, values in opcoes.items()])}):" 
     
@@ -12,8 +14,8 @@ def obter_opcoes(opcoes, msg='Opções'):
         
     return valor
 
-# outra função professor
 def obter_valor(msg='', func=float):
+    
     while True:
         valor = input(msg)
         try:
