@@ -1,19 +1,46 @@
-Enunciado
+# Manipulação de Dados em Formato JSON
 
-Ler um arquivo formato JSON.
+## Objetivo do Trabalho
 
-Realizar um mapeamento, filtro e redução.
+Este trabalho visa demonstrar a capacidade de manipulação de dados em formato JSON, implementando operações como leitura de arquivo, mapeamento, filtro, redução e manipulação estatística. Além disso, o objetivo é garantir a integridade dos dados com validações adequadas, permitindo operações de leitura individual, atualização e exclusão, mantendo o JSON sempre atualizado.
 
-Permitir que os dados podem ser lidos individualmente, atualizados e deletados (manter JSON atualizado);
+## Funcionalidades Implementadas
 
-Garantir que todas as operações tenham validações (try/except, raise);
+1. **Leitura de Arquivo JSON:**
+   - Realiza a leitura de um arquivo no formato JSON para carregar os dados.
 
-Obter algum dado estatístico simples, como média de um grupo (exemplo, a média de idade dos professores que dão aula de exatas, caso o conjunto de dados seja do tema professor);
+2. **Mapeamento:**
+   - Efetua o mapeamento dos dados, proporcionando uma visão estruturada e facilitando a manipulação.
 
-Criar uma função para obter uma lista de tuplas, com máximo (ou minimo) valor de algum atributo numérico, com a primeira posição contendo o nome do elemento e a segunda o valor máximo (o motivo de ser uma lista é porque pode ter mais de um elemento com valor máximo);
+3. **Filtro:**
+   - Implementa um filtro para restringir os dados com base em critérios específicos.
 
-Esta função deve ser um parametro opcional, que diz qual das estatisticas você deseja obter (máximo ou minimo);
+4. **Redução:**
+   - Realiza a redução dos dados, simplificando o conjunto de informações para análises específicas.
 
-Obter algum dado estatístico simples, como média, máximo ou minimo (exemplo, a média de idade dos professores que dão aulas de exatas, caso o conjunto de dados seja do tema professor);
+5. **Operações CRUD:**
+   - Permite a leitura individual, atualização e exclusão de dados, garantindo a integridade do JSON.
 
-Salvar dados estatísticos em um CSV.
+6. **Validações (try/except, raise):**
+   - Integra validações em todas as operações para assegurar a consistência dos dados e prevenir erros.
+
+7. **Dados Estatísticos Simples:**
+   - Calcula estatísticas simples, como a média, máximo ou mínimo, para dados específicos do conjunto (ex: raça dos animais ou idade).
+
+8. **Lista de Tuplas com Valor Máximo ou Mínimo:**
+   - Gera uma lista de tuplas, contendo o nome do elemento e o valor máximo ou mínimo de algum atributo numérico. Esta função é parametrizada para obter estatísticas específicas.
+
+9. **Salvar Dados Estatísticos em CSV:**
+   - Implementa a funcionalidade de salvar os dados estatísticos obtidos em um arquivo CSV para análises posteriores.
+
+## Prompt Utilizado para Gerar Arquivo Json pelo ChatGPT:
+- Can you make a json file?
+- I need a json file with examples of: records from a pet shop, to enter age, species, breed.
+
+## Equipe
+
+- Gustavo Amorim
+- João Victor Lemos da Silva
+- Maressa Karen Henrique da Silva
+- Mariana Franz Marroquim
+- Wellington Soares Lopes
