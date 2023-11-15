@@ -36,7 +36,7 @@ Este trabalho visa demonstrar a capacidade de manipulação de dados em formato 
 ## Prompt Utilizado para Gerar Arquivo Json pelo ChatGPT:
 - Can you make a json file?
 - I need a json file with examples of: records from a pet shop, to enter age, species, breed.
-- Add in this json values referring to weight and fur color
+- Add in this json values referring to weight and fur color.
 
 ## Equipe
 
