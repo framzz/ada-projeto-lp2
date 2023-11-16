@@ -19,4 +19,5 @@
     {"name": "Luna", "age": 2, "species": "Cat", "breed": "Sphynx", "weight": 6, "fur_color": "Pink"},
     {"name": "Teddy", "age": 4, "species": "Dog", "breed": "Cavalier King Charles Spaniel", "weight": 13, "fur_color": "Blenheim"},
     {"name": "Oliver", "age": 1, "species": "Cat", "breed": "British Shorthair", "weight": 11, "fur_color": "Blue"}
+    {"name": "Felicia", "age": 4, "species": "Cat", "breed": "Siamese", "weight": 8, "fur_color": "White/Tan"}
 ]
