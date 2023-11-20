@@ -1,20 +1,26 @@
-from funcoes import valida_opcoes, obter_opcoes, obter_valor
+from funcoesProfessor import valida_opcoes, obter_opcoes, obter_valor
 
 # opter opções 
 def input_name() -> str:
-    return input('Entre com nome:').title()
+    return input('Entre com nome: ').title()
 
-def obter_idade() -> int:
-    return obter_valor('Entre com idade:', func=int)
+def input_age() -> int:
+    return obter_valor('Entre com idade: ', func=int)
 
-def obter_sexo() -> str:
-    return input('Entre com sexo').capitalize()
+def input_species() -> str:
+    return input('Entre com a especie: ').capitalize()
 
-def obter_altura() -> float:
-    return obter_valor('Entre com a altura (m):')
+def input_breed() -> str:
+    return input('Entre com a raça: ').title()
 
-def obter_disciplina() -> str:
-    return input('Entre com Disciplina: ').capitalize()
+def input_weight() -> float:
+    return input('Entre com o peso: ')
+
+def input_fur() -> str:
+    return input('Entre com nome: ').title()
+
+def input_attribute() -> str:
+    return obter_opcoes({'AGE': "Pet's age", 'WEIGHT': "Pet's weight"}, 'Choose an input: ').lower()
 
 # formata um pet
 def formatting_pet_data(pet: dict) -> str:
@@ -33,13 +39,14 @@ def show_all(pets: dict)-> bool:
     print(formatting_all_pets(pets))
     return True
     
-def insert_new(pets: list[dict]) -> bool:
+def insert_new(pets: dict) -> bool:
     pets.append({
-        'nome': input_name(),
-        'idade': obter_idade(),
-        'sexo': obter_sexo(),
-        'altura': obter_altura(),
-        'disciplina': obter_disciplina()
+        'name': input_name(),
+        'age': input_age(),
+        'spc': input_species(),
+        'breed': input_breed(),
+        'weight': input_weight(),
+        'fur': input_fur()
     })
     
     return True
@@ -62,25 +69,26 @@ def delete(pets: dict) -> bool:
         return False
 
 def exec_alteration(prof: dict) -> None:
-    opc = {
-        'N': 'Nome',
-        'I': 'Idade',
-        'A': 'Altura',
-        'S': 'Sexo',
-        'D': 'Disciplina',
-        'F': 'Finalizar'
+    opc_pet = {
+        'NAME': "Pet's name",
+        'AGE': "Pet's age" ,
+        'SPC': "Pet's species",
+        'BREED': "Pet's breed",
+        'WEIGHT': "Pet's weight",
+        'FUR': "Pet's fur color",
     }
     
     opc_e = {
-        'N' : ('nome', input_name),
-        'I' : ('idade', obter_idade),
-        'A' : ('altura', obter_altura),
-        'S' : ('sexo', obter_sexo),
-        'D' : ('disciplina', obter_disciplina),
+        'N' : ('name', input_name),
+        'A' : ('age', input_age),
+        'S' : ('spc', input_species),
+        'B' : ('breed', input_breed),
+        'W' : ('weight', input_weight),
+        'F' : ('fur', input_fur),
     }
     
     while True:
-        o = obter_opcoes(opc, 'Escolha o campo')
+        o = obter_opcoes(opc_pet, 'Escolha o campo')
         
         if o == 'F':
             break
@@ -99,7 +107,7 @@ def update(profs: dict) -> bool:
     msg = f'Tem certeza que deseja alterar [{formatting_pet_data(alterado)}]'
     
     if obter_opcoes({'S': 'Sim', 'N': 'Não'}, msg) == 'S':
-        exec_alteration(alterado)       
+        exec_alteration(alterado)    
         return True
     else:
         return False

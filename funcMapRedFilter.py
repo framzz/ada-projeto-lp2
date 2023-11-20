@@ -9,8 +9,8 @@ def filter_dogs(data: dict):
     return data['species'] == 'Dog'
 
 # função para calcular a soma de idades dos animais
-def sum_age(data: dict) -> float:
-    return reduce(lambda x, pet: x + pet['age'], data, 0)
+def sum_age(data: dict, attribute: str) -> float:
+    return reduce(lambda x, pet: x + pet[attribute], data, 0)
 
 # função para calcular a média de idade dos animais
 def average_age(data: dict, reduce_function) -> float:
@@ -22,5 +22,5 @@ def process_pet(pet):
     pet['weight_plus'] = pet['weight'] + 5
     return pet
 
-def return_statistics_avarage(data):
-    return average_age(data, sum_age(data))
+def return_statistics_avarage(data, att):
+    return average_age(data, sum_age(data, att))

@@ -1,4 +1,5 @@
 from funcoesProfessor import obter_opcoes
+from funcCRUD import input_attribute 
 
 # função para retornar o registro maximo de um atributo 
 def max_attribute_value(data: dict, attribute: str) -> list:
@@ -10,13 +11,18 @@ def min_attribute_value(data: dict, attribute: str) -> list:
     min_value = min(data, key=lambda x: x[attribute])[attribute]
     return [(pet['name'], pet[attribute]) for pet in data if pet[attribute] == min_value]
 
+opc_max_min = {
+    'MAX': 'Máximo', #salvando dados 
+    'MIN': 'Mínimo'
+}
 
-def max_min(opc_max_min: dict, opc_att: dict, data) -> list:
-    option = obter_opcoes(opc_max_min, 'Choose an input: ')
-    att = obter_opcoes(opc_att, 'Choose an input: ').lower()
-    if option == 'MAX':
+def input_max_min() -> str:
+    return obter_opcoes(opc_max_min, 'Choose an input: ')
+
+def max_min(opc_max_min: str = input_max_min , att: str = input_attribute, data = dict) -> list:
+    if opc_max_min == 'MAX':
         return max_attribute_value(data, att)
-    elif option == 'MIN':
+    elif opc_max_min == 'MIN':
         return min_attribute_value(data, att)
     else:
         return []
