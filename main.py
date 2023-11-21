@@ -1,7 +1,7 @@
 # importando libs necessária para o projeto
-from funcoesProfessor import obter_opcoes
 import funcFile as ff
-from funcCRUD import show_all, insert_new, delete, update, formatting_all_pets, find_pet, input_name
+import funcCRUD as fc
+from funcStatistics import filter_data
 
 opc_pet = {
     'NAME': "Pet's name",
@@ -14,27 +14,33 @@ opc_pet = {
 
 opc = {
     'I': 'Insert', #OK 
-    'U': 'Update', 
+    'U': 'Update', #OK
     'D': 'Delete', #OK
     'F': 'Find', #OK
     'SA': 'Show All', #OK
-    #'EX': 'Sair'
+    'FI': 'Filter',
+    'EX': 'Exit' #OK
 }
 
 opc_func = {
-    'I': insert_new,
-    'D': delete,
-    'U': update,
-    'SA': show_all,
-    'F': lambda data: print(formatting_all_pets(find_pet(data, input_name())))
+    'I': fc.insert_new,
+    'D': fc.delete,
+    'U': fc.update,
+    'SA': fc.show_all,
+    'FI': fc.entering_func,
+    'F': lambda data: print(fc.formatting_all_pets(fc.find_pet(data, fc.input_name()))),
+    'EX': ff.func_exit
 }
 
-while True:
+s = True
+while s == True:
     data = ff.open_json_file()
-    opc_func[obter_opcoes(opc, 'Escolha uma ação')](data)
+    option = fc.obter_opcoes(opc, 'Choose and action: ')
+    opc_func[option](data)
     ff.save_json_file(data)
     
-
-    if obter_opcoes({'S': 'Sim', 'N': 'Não'}, 'Deseja Sair') == 'S':
-        ff.save_csv(ff.run_statistics(data))
-        break
+    if option == 'FI':
+        print("Here's your filtered data: ")
+        print(filter_data(data))
+    elif option == 'EX':
+        s = False

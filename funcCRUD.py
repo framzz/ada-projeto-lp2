@@ -1,32 +1,61 @@
-from funcoesProfessor import valida_opcoes, obter_opcoes, obter_valor
+# função para validar opções feita pelo professor em aula
+def valida_opcoes(valor: str, opcoes: list) -> bool:
+    return valor in opcoes
 
-# opter opções 
+# função para obter opções feita pelo professor em aula
+def obter_opcoes(opcoes, msg='Opções'):
+    msg = f"{msg} ({' | '.join([f'{key} - {values}' for key, values in opcoes.items()])}):" 
+    
+    while True:
+        valor = input(msg).upper()
+    
+        if valida_opcoes(valor, opcoes.keys()):
+            break
+        
+        msg = f'Entrada Inválida! As opções validas são {", ".join(opcoes.keys())} \n' + msg
+        
+    return valor
+
+# função para obter valor feita pelo professor em aula
+def obter_valor(msg='', func=float):
+    
+    while True:
+        valor = input(msg)
+        try:
+            return list(map(func, [valor]))[0]
+        except ValueError:
+            msg = f'Entrada Inválida! {msg}'
+
+# funções para receber o input de opções 
 def input_name() -> str:
-    return input('Entre com nome: ').title()
+    return input("Enter the pet's name: ").title()
 
 def input_age() -> int:
-    return obter_valor('Entre com idade: ', func=int)
+    return obter_valor("Enter the pet's age: ", func=int)
 
 def input_species() -> str:
-    return input('Entre com a especie: ').capitalize()
+    return input("Enter the pet's species: ").capitalize()
 
 def input_breed() -> str:
-    return input('Entre com a raça: ').title()
+    return input("Enter the pet's breed: ").title()
 
 def input_weight() -> float:
-    return input('Entre com o peso: ')
+    return obter_valor("Enter the pet's weight: ", func=float)
 
 def input_fur() -> str:
-    return input('Entre com nome: ').title()
+    return input("Enter the pet's fur color: ").title()
 
-def input_attribute() -> str:
-    return obter_opcoes({'AGE': "Pet's age", 'WEIGHT': "Pet's weight"}, 'Choose an input: ').lower()
+def input_attribute(options) -> str:
+    return obter_opcoes(options, 'Choose an attribute: ').lower()
+
+def entering_func(data) -> str:
+    return print(f'Entering filter on {data}...')
 
 # formata um pet
 def formatting_pet_data(pet: dict) -> str:
     return '\n'.join([f'{key.title()}: {value}' for key, value in pet.items()])
 
-# formata todos os pets
+# formata todos os pets - USANDO MAP
 def formatting_all_pets(pets: dict):
     return '\n\n'.join(list(map(formatting_pet_data, pets)))
 
@@ -43,71 +72,72 @@ def insert_new(pets: dict) -> bool:
     pets.append({
         'name': input_name(),
         'age': input_age(),
-        'spc': input_species(),
+        'species': input_species(),
         'breed': input_breed(),
         'weight': input_weight(),
-        'fur': input_fur()
+        'fur_color': input_fur()
     })
     
     return True
     
 def delete(pets: dict) -> bool:
-    apagado = find_pet(pets, input_name())
+    deleted = find_pet(pets, input_name())
     
-    if len(apagado) == 0:
-        print('Não foi encontrado!')
+    if len(deleted) == 0:
+        print(f'{deleted} does not exist in our database!')
         return False
     
-    apagado = apagado[0]
+    deleted = deleted[0]
     
-    msg = f'Tem certeza que deseja excluir [{formatting_pet_data(apagado)}]'
+    msg = f'Are you sure you want to delete the following pet: [{formatting_pet_data(deleted)}]?'
     
-    if obter_opcoes({'S': 'Sim', 'N': 'Não'}, msg) == 'S':
-        pets.remove(apagado)
+    if obter_opcoes({'Y': 'Yes', 'N': 'No'}, msg) == 'Y':
+        pets.remove(deleted)
         return True
     else:
         return False
 
-def exec_alteration(prof: dict) -> None:
-    opc_pet = {
-        'NAME': "Pet's name",
-        'AGE': "Pet's age" ,
-        'SPC': "Pet's species",
-        'BREED': "Pet's breed",
-        'WEIGHT': "Pet's weight",
-        'FUR': "Pet's fur color",
-    }
-    
-    opc_e = {
-        'N' : ('name', input_name),
-        'A' : ('age', input_age),
-        'S' : ('spc', input_species),
-        'B' : ('breed', input_breed),
-        'W' : ('weight', input_weight),
-        'F' : ('fur', input_fur),
+def exec_alteration_update(data: dict) -> None:
+    opc = {
+        'N': 'name',
+        'A': 'age',
+        'S': 'species',
+        'B': 'breed',
+        'W': 'weight',
+        'F': 'fur_color',
+        'E': 'end'
     }
     
     while True:
-        o = obter_opcoes(opc_pet, 'Escolha o campo')
-        
-        if o == 'F':
-            break
-        
-        prof[opc_e[o][0]] = opc_e[o][1]()
+        match obter_opcoes(opc, 'Escolha o campo'):
+            case 'E':
+                break
+            case 'N':
+                data['name'] = input_name()
+            case 'A':
+                data['age'] = input_age()
+            case 'S':
+                data['species'] = input_species()
+            case 'B':
+                data['breed'] = input_breed()
+            case 'W':
+                data['weight'] = input_weight()
+            case 'F':
+                data['fur_color'] = input_fur()
 
-def update(profs: dict) -> bool:
-    alterado = find_pet(profs, input_name())
+def update(pets: dict) -> bool:
+    updated = find_pet(pets, input_name())
     
-    if len(alterado) == 0:
-        print('Não foi encontrado!')
+    if len(updated) == 0:
+        print(f'{updated} does not exist in our database!')
         return False
     
-    alterado = alterado[0]
+    updated = updated[0]
+    msg = f'Are you sure you want to update the following pet: [{formatting_pet_data(updated)}]'
     
-    msg = f'Tem certeza que deseja alterar [{formatting_pet_data(alterado)}]'
-    
-    if obter_opcoes({'S': 'Sim', 'N': 'Não'}, msg) == 'S':
-        exec_alteration(alterado)    
+    if obter_opcoes({'Y': 'Yes', 'N': 'No'}, msg) == 'Y':
+        exec_alteration_update(updated)    
         return True
     else:
         return False
+    
