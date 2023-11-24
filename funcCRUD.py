@@ -1,8 +1,8 @@
-# função para validar opções feita pelo professor em aula
+# função para validar opções 
 def valida_opcoes(valor: str, opcoes: list) -> bool:
     return valor in opcoes
 
-# função para obter opções feita pelo professor em aula
+# função para obter opções 
 def obter_opcoes(opcoes, msg='Opções'):
     msg = f"{msg} ({' | '.join([f'{key} - {values}' for key, values in opcoes.items()])}):" 
     
@@ -16,7 +16,7 @@ def obter_opcoes(opcoes, msg='Opções'):
         
     return valor
 
-# função para obter valor feita pelo professor em aula
+# função para obter valor 
 def obter_valor(msg='', func=float):
     
     while True:
@@ -61,15 +61,19 @@ def formatting_all_pets(pets: dict):
 
 # procurando o nome do animal dentro dos dados
 def find_pet(data: dict, name: str) -> list:
-  return [pet for pet in data if pet['name'] == name]
+    try:
+        return [pet for pet in data if pet['name'] == name]
+    except Exception:
+        return []
 
 # retorna todos os pets
-def show_all(pets: dict)-> bool:
-    print(formatting_all_pets(pets))
+def show_all(data: dict)-> bool:
+    print(formatting_all_pets(data))
     return True
-    
-def insert_new(pets: dict) -> bool:
-    pets.append({
+
+# insere novo pet
+def insert_new(data: dict) -> bool:
+    data.append({
         'name': input_name(),
         'age': input_age(),
         'species': input_species(),
@@ -77,25 +81,29 @@ def insert_new(pets: dict) -> bool:
         'weight': input_weight(),
         'fur_color': input_fur()
     })
-    
+
     return True
-    
-def delete(pets: dict) -> bool:
-    deleted = find_pet(pets, input_name())
-    
-    if len(deleted) == 0:
-        print(f'{deleted} does not exist in our database!')
-        return False
-    
-    deleted = deleted[0]
-    
-    msg = f'Are you sure you want to delete the following pet: [{formatting_pet_data(deleted)}]?'
-    
-    if obter_opcoes({'Y': 'Yes', 'N': 'No'}, msg) == 'Y':
-        pets.remove(deleted)
-        return True
-    else:
-        return False
+
+# deletando um pet
+def delete(data: dict) -> bool:
+    try:
+        deleted = find_pet(data, input_name())
+
+        if len(deleted) == 0:
+            print(f'{deleted} does not exist in our database!')
+            return False
+
+        deleted = deleted[0]
+
+        msg = f'Are you sure you want to delete the following pet: [{formatting_pet_data(deleted)}]?'
+
+        if obter_opcoes({'Y': 'Yes', 'N': 'No'}, msg) == 'Y':
+            data.remove(deleted)
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f'Could not delete the pet. Error {e}')
 
 def exec_alteration_update(data: dict) -> None:
     opc = {
@@ -126,18 +134,21 @@ def exec_alteration_update(data: dict) -> None:
                 data['fur_color'] = input_fur()
 
 def update(pets: dict) -> bool:
-    updated = find_pet(pets, input_name())
-    
-    if len(updated) == 0:
-        print(f'{updated} does not exist in our database!')
-        return False
-    
-    updated = updated[0]
-    msg = f'Are you sure you want to update the following pet: [{formatting_pet_data(updated)}]'
-    
-    if obter_opcoes({'Y': 'Yes', 'N': 'No'}, msg) == 'Y':
-        exec_alteration_update(updated)    
-        return True
-    else:
-        return False
+    try:
+        updated = find_pet(pets, input_name())
+
+        if len(updated) == 0:
+            print(f'{updated} does not exist in our database!')
+            return False
+
+        updated = updated[0]
+        msg = f'Are you sure you want to update the following pet: [{formatting_pet_data(updated)}]'
+
+        if obter_opcoes({'Y': 'Yes', 'N': 'No'}, msg) == 'Y':
+            exec_alteration_update(updated)
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f'Could not update the pet. Error {e}')
     

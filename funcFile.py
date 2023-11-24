@@ -15,20 +15,20 @@ def open_json_file(filepath: str = 'petshop.json') -> list:
         raise e
 
 # definindo função para salvar dados
-def save_json_file(data: list, filepath: str = 'petshop.json') -> bool:
+def save_json_file(data: list, filepath: str = 'petshop.json'):
     try:
         with open(filepath, 'w') as f:
             f.write(json.dumps(data))
-            return True
-    except Exception:
-        return False
+            return print('Your changes were saved.')
+    except Exception as e:
+        return print(f'Not able to save your changes. Error {e}')
     
 # função para executar as estatisticas
 def run_statistics(data, attribute, max_or_min):
     try:
-        avarage = return_statistics_avarage(data, attribute)
+        average = return_statistics_avarage(data, attribute)
         max_min_statistic = max_min(max_or_min, attribute, data)
-        return [avarage, max_min_statistic]
+        return [average, max_min_statistic]
     except Exception as e:
         raise e
         
@@ -36,14 +36,15 @@ def run_statistics(data, attribute, max_or_min):
 def save_csv(data: list, attribute: str, max_or_min: str, filename: str = 'petshop.csv'):
     try:
         with open(filename, mode='w', newline='') as f:
-            writer = csv.writer(f)
+            writer = csv.writer(f, delimiter=';', lineterminator='\n')
         
-            writer.writerow(['Média:', data[0]])
-
-            writer.writerow(['Nome', attribute, max_or_min])  
-            writer.writerows(data[1]) 
+            writer.writerow(['Chosen attribute:', attribute])
+            writer.writerow(['Average:', round(data[0],2)])
+            writer.writerow(['Name', max_or_min + ' ' + attribute])  
+            writer.writerows(data[1])
+            return print('Your csv is ready!') 
     except Exception as e:
-        raise e
+        return print(f'Not able to save your csv. Error {e}')
 
 # função para sair do programa e retornar as estatisticas no csv
 def func_exit(data):

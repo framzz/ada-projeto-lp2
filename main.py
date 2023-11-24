@@ -34,11 +34,15 @@ opc_func = {
 
 s = True
 while s == True:
-    data = ff.open_json_file()
+    try:
+        data = ff.open_json_file()   
+    except Exception as e:
+        print(f'File not found. Error: {e}') 
+        break  
     option = fc.obter_opcoes(opc, 'Choose and action: ')
     opc_func[option](data)
     ff.save_json_file(data)
-    
+
     if option == 'FI':
         print("Here's your filtered data: ")
         print(filter_data(data))

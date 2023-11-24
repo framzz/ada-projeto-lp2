@@ -1,28 +1,30 @@
 from functools import reduce
 from funcCRUD import input_attribute, obter_opcoes
 
-# função para filtrar 
-def filter_data(data):
-    option = input('Choose what attribute you want to filter: name, age, species, breed, weight, fur_color: ').lower()
-    filter_value = input(f'Enter the value for {option}: ').strip().capitalize()  # Capturar o valor a ser filtrado
-    
-    if option in ('name', 'species', 'breed', 'fur_color'):
-        filter_value = filter_value.capitalize()  # Garantir que as strings sejam capitalizadas para comparação
-        return list(filter(lambda pet: str(pet.get(option)).strip().capitalize() == filter_value, data))
-    elif option == 'age':
-        filter_value = int(filter_value)  # Converter a entrada para inteiro
-        return list(filter(lambda pet: int(pet.get(option)) == filter_value, data))
-    elif option == 'weight':
-        filter_value = float(filter_value)  # Converter a entrada para float
-        return list(filter(lambda pet: float(pet.get(option)) == filter_value, data))
-    else:
+# função para filtrar
+def filter_data(data: dict[list]):
+    try:
+        option = input('Choose what attribute you want to filter: name, age, species, breed, weight, fur_color: ').lower()
+        filter_value = input(f'Enter the value for {option}: ').strip().capitalize()  # Capturar o valor a ser filtrado
+        if option in ('name', 'species', 'breed', 'fur_color'):
+            filter_value = filter_value.capitalize()  # Garantir que as strings sejam capitalizadas para comparação
+            return list(filter(lambda pet: str(pet.get(option)).strip().capitalize() == filter_value, data))
+        elif option == 'age':
+            filter_value = int(filter_value)  # Converter a entrada para inteiro
+            return list(filter(lambda pet: int(pet.get(option)) == filter_value, data))
+        elif option == 'weight':
+            filter_value = float(filter_value)  # Converter a entrada para float
+            return list(filter(lambda pet: float(pet.get(option)) == filter_value, data))
+        else:
+            return []
+    except Exception as e:
         return []
 
-# função para calcular a soma de idades dos animais
+# função para calcular a soma de idades/peso dos animais
 def sum_age(data: list[dict], attribute: str) -> float:
     return reduce(lambda x, pet: x + pet[attribute], data, 0)
 
-# função para calcular a média de idade dos animais
+# função para calcular a média de idade/peso dos animais
 def average_age(data: dict, reduce_function) -> float:
     return (reduce_function / len(data))
 
